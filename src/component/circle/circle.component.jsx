@@ -31,7 +31,9 @@ const Circle = () => {
 
   return (
     <StyledCircle side={350}>
-      <NumberSlot />
+      {numberSlotList.map(slot => (
+        <NumberSlot {...slot} />
+      ))}
     </StyledCircle>
   );
 };
