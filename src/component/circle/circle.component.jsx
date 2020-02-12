@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyledCircle } from './circle.style';
+import { StyledCircle, StyledCircleWrapper } from './circle.style';
 import NumberSlot from '../number-slot';
+import Sphere from '../sphere';
 
 const Circle = () => {
   const length = 18;
@@ -30,11 +31,14 @@ const Circle = () => {
   console.log(numberSlotList);
 
   return (
-    <StyledCircle side={350}>
-      {numberSlotList.map(slot => (
-        <NumberSlot {...slot} />
-      ))}
-    </StyledCircle>
+    <StyledCircleWrapper>
+      <StyledCircle side={350}>
+        {numberSlotList.map(slot => (
+          <NumberSlot {...slot} />
+        ))}
+      </StyledCircle>
+      <Sphere />
+    </StyledCircleWrapper>
   );
 };
 

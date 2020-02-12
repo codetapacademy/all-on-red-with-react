@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+export const StyledCircleWrapper = styled.div`
+  position: relative;
+`;
+
 export const StyledCircle = styled.div`
   background-color: #94632c;
   border-radius: 50%;
