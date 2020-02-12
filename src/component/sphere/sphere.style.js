@@ -7,8 +7,9 @@ export const StyledSphere = styled.div`
   position: absolute;
   left: 160px;
   top: 50px;
-  transform: rotate(20deg);
+  transform: rotate(0deg);
   transform-origin: 50% 100%;
+  animation: sphereSpin 5s ease-out forwards;
 
   &::after {
     content: '';
@@ -19,5 +20,14 @@ export const StyledSphere = styled.div`
     height: 30px;
     background-color: grey;
     border-radius: 50%;
+  }
+
+  @keyframes sphereSpin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(1440deg);
+    }
   }
 `;
