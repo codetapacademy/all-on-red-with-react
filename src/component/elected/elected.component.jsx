@@ -37,8 +37,6 @@ const Elected = ({ numberSlotList, handleElect }) => {
     ] = 11;
   });
 
-  console.log(election);
-
   return (
     <StyledElected>
       {Object.keys(election).map(key => (

@@ -33,8 +33,16 @@ const Circle = () => {
 
   // console.log(numberSlotList);
 
-  const bet = () => {
-    const randomNumber = Math.round(Math.random() * 38);
+  const showMessage = (win, multiplier) => {
+    if (win) {
+      console.log(`You won £${multiplier * 10}`);
+    } else {
+      console.log(`You lost £${multiplier * 10}`);
+    }
+  };
+
+  const spinIt = () => {
+    const randomNumber = Math.round(Math.random() * 37);
     setWin({
       ...numberSlotList[randomNumber],
       animationPlayState: 'running',
@@ -42,6 +50,21 @@ const Circle = () => {
         numberSlotList[randomNumber].rotation +
         360 * (~~(Math.random() * 7) + 3)
     });
+
+    console.log(numberSlotList[randomNumber], elected);
+
+    const { key, multiplier } = elected;
+
+    if (['even', 'odd'].includes(key)) {
+      const obj = {
+        0: 'even',
+        1: 'odd'
+      };
+      showMessage(
+        obj[+numberSlotList[randomNumber].number % 2] === key,
+        multiplier
+      );
+    }
   };
 
   const handleElect = (key, multiplier) => {
@@ -56,7 +79,7 @@ const Circle = () => {
         ))}
       </StyledCircle>
       <Sphere win={win} />
-      {elected && <button onClick={bet}>Spin Roulette</button>}
+      {elected && <button onClick={spinIt}>Spin It</button>}
       <Elected numberSlotList={numberSlotList} handleElect={handleElect} />
     </StyledCircleWrapper>
   );
