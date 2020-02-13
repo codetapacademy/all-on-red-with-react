@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { StyledCircle, StyledCircleWrapper } from './circle.style';
 import NumberSlot from '../number-slot';
 import Sphere from '../sphere';
+import Elected from '../elected/elected.component';
 
 const Circle = () => {
   const [win, setWin] = useState({ animationPlayState: 'paused' });
@@ -51,6 +52,7 @@ const Circle = () => {
       </StyledCircle>
       <Sphere win={win} />
       <button onClick={bet}>BET</button>
+      <Elected numberSlotList={numberSlotList} />
     </StyledCircleWrapper>
   );
 };
