@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyledElected } from './elected.style';
 
-const Elected = ({ numberSlotList }) => {
+const Elected = ({ numberSlotList, handleElect }) => {
   const election = {
     black: 1,
     red: 1,
@@ -39,7 +39,15 @@ const Elected = ({ numberSlotList }) => {
 
   console.log(election);
 
-  return <StyledElected>ELECTED</StyledElected>;
+  return (
+    <StyledElected>
+      {Object.keys(election).map(key => (
+        <button key={key} onClick={() => handleElect(key, election[key])}>
+          {key}
+        </button>
+      ))}
+    </StyledElected>
+  );
 };
 
 export default Elected;

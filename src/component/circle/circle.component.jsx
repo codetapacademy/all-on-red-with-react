@@ -5,6 +5,7 @@ import Sphere from '../sphere';
 import Elected from '../elected/elected.component';
 
 const Circle = () => {
+  const [elected, setElected] = useState(null);
   const [win, setWin] = useState({ animationPlayState: 'paused' });
   const length = 18;
   const numberSlotList = [
@@ -43,6 +44,10 @@ const Circle = () => {
     });
   };
 
+  const handleElect = (key, multiplier) => {
+    setElected({ key, multiplier });
+  };
+
   return (
     <StyledCircleWrapper>
       <StyledCircle side={350}>
@@ -51,8 +56,8 @@ const Circle = () => {
         ))}
       </StyledCircle>
       <Sphere win={win} />
-      <button onClick={bet}>BET</button>
-      <Elected numberSlotList={numberSlotList} />
+      {elected && <button onClick={bet}>Spin Roulette</button>}
+      <Elected numberSlotList={numberSlotList} handleElect={handleElect} />
     </StyledCircleWrapper>
   );
 };
