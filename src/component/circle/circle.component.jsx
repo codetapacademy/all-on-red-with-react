@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyledCircle, StyledCircleWrapper } from './circle.style';
 import NumberSlot from '../number-slot';
 import Sphere from '../sphere';
 
 const Circle = () => {
+  const [win, setWin] = useState({});
   const length = 18;
   const numberSlotList = [
     {
@@ -28,16 +29,22 @@ const Circle = () => {
     }))
   ];
 
-  console.log(numberSlotList);
+  // console.log(numberSlotList);
+
+  const bet = () => {
+    const randomNumber = Math.round(Math.random() * 38);
+    setWin(numberSlotList[randomNumber]);
+  };
 
   return (
     <StyledCircleWrapper>
       <StyledCircle side={350}>
         {numberSlotList.map(slot => (
-          <NumberSlot {...slot} />
+          <NumberSlot key={slot.number} {...slot} />
         ))}
       </StyledCircle>
-      <Sphere />
+      <Sphere rotation={win.rotation} />
+      <button onClick={bet}>BET</button>
     </StyledCircleWrapper>
   );
 };
