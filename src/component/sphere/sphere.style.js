@@ -10,6 +10,7 @@ export const StyledSphere = styled.div`
   transform: rotate(0deg);
   transform-origin: 50% 100%;
   animation: sphereSpin 5s ease-out forwards;
+  animation-play-state: ${({ win }) => win.animationPlayState};
 
   &::after {
     content: '';
@@ -27,7 +28,7 @@ export const StyledSphere = styled.div`
       transform: rotate(0deg);
     }
     to {
-      transform: rotate(${({ rotation }) => rotation}deg);
+      transform: rotate(${({ win }) => win.rotation}deg);
     }
   }
 `;

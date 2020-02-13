@@ -4,7 +4,7 @@ import NumberSlot from '../number-slot';
 import Sphere from '../sphere';
 
 const Circle = () => {
-  const [win, setWin] = useState({});
+  const [win, setWin] = useState({ animationPlayState: 'paused' });
   const length = 18;
   const numberSlotList = [
     {
@@ -33,7 +33,13 @@ const Circle = () => {
 
   const bet = () => {
     const randomNumber = Math.round(Math.random() * 38);
-    setWin(numberSlotList[randomNumber]);
+    setWin({
+      ...numberSlotList[randomNumber],
+      animationPlayState: 'running',
+      rotation:
+        numberSlotList[randomNumber].rotation +
+        360 * (~~(Math.random() * 7) + 3)
+    });
   };
 
   return (
@@ -43,7 +49,7 @@ const Circle = () => {
           <NumberSlot key={slot.number} {...slot} />
         ))}
       </StyledCircle>
-      <Sphere rotation={win.rotation} />
+      <Sphere win={win} />
       <button onClick={bet}>BET</button>
     </StyledCircleWrapper>
   );
