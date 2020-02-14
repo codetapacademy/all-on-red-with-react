@@ -6,6 +6,7 @@ import Elected from '../elected/elected.component';
 
 const Circle = () => {
   const [elected, setElected] = useState(null);
+  const [message, setMessage] = useState('');
   const [win, setWin] = useState({ animationPlayState: 'paused' });
   const length = 18;
   const numberSlotList = [
@@ -35,9 +36,9 @@ const Circle = () => {
 
   const showMessage = (win, multiplier) => {
     if (win) {
-      console.log(`You won £${multiplier * 10}`);
+      setMessage(`You won £${multiplier * 10}`);
     } else {
-      console.log(`You lost £${multiplier * 10}`);
+      setMessage(`You lost £${multiplier * 10}`);
     }
   };
 
@@ -67,7 +68,11 @@ const Circle = () => {
     } else if (['black', 'red'].includes(key)) {
       showMessage(numberSlotList[randomNumber].color === key, multiplier);
     } else {
-      showMessage(numberSlotList[randomNumber].color === key, multiplier);
+      const keyPieces = key.split(',');
+      showMessage(
+        keyPieces.includes(numberSlotList[randomNumber].number),
+        multiplier
+      );
     }
   };
 
@@ -83,6 +88,7 @@ const Circle = () => {
         ))}
       </StyledCircle>
       <Sphere win={win} />
+      <div>{message}</div>
       {elected && <button onClick={spinIt}>Spin It</button>}
       <Elected numberSlotList={numberSlotList} handleElect={handleElect} />
     </StyledCircleWrapper>
