@@ -64,6 +64,10 @@ const Circle = () => {
         obj[+numberSlotList[randomNumber].number % 2] === key,
         multiplier
       );
+    } else if (['black', 'red'].includes(key)) {
+      showMessage(numberSlotList[randomNumber].color === key, multiplier);
+    } else {
+      showMessage(numberSlotList[randomNumber].color === key, multiplier);
     }
   };
 
