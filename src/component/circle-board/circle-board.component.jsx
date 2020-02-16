@@ -1,8 +1,9 @@
 import React from 'react'
+import { StyledCircleBoard } from './circle-board.style'
 
 const CircleBoard = () => {
   return (
-    <p>This will be the board</p>
+    <StyledCircleBoard side={300}/>
   )
 }
 
