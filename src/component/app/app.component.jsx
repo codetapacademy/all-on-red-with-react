@@ -1,8 +1,12 @@
 import React from 'react'
+import CircleBoard from '../circle-board'
 
 const App = () => {
   return (
-    <h1>App</h1>
+    <div>
+      <h1>App</h1>
+      <CircleBoard />
+    </div>
   )
 }
 
