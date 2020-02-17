@@ -3,7 +3,7 @@ import { StyledMagicSlot } from './magic-slot.style'
 
 const MagicSlot = () => {
   return (
-    <StyledMagicSlot>This will be a Big Boy SLOT</StyledMagicSlot>
+    <StyledMagicSlot>1</StyledMagicSlot>
   )
 }
 
