@@ -1,1 +1,1 @@
-console.log('This is Spartaaaa!')
+console.log('This is Sparta!')
