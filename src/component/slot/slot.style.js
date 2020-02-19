@@ -5,9 +5,11 @@ export const StyledSlot = styled.div`
   position: relative;
   display: inline-block;
   margin-left: 165px;
+  transform: rotate(120deg);
+  transform-origin: 50% 100%;
 
   &::after {
-    content: '1';
+    content: ${({ number }) => `"${number}"`};
     position: relative;
   }
 
