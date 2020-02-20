@@ -9,7 +9,7 @@ export const StyledSlot = styled.div`
   transform-origin: 50% 100%;
 
   &::after {
-    content: ${({ number }) => `"${number}"`};
+    content: ${({ number }) => `${number}`};
     position: relative;
   }
 
