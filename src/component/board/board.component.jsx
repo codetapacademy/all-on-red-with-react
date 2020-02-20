@@ -27,9 +27,9 @@ const Board = () => {
         color: n % 2 ? 'red' : 'black',
     }))
   ]
-  console.log(slotList)
+
   return (
-    <StyledBoard side={350}>
+    <StyledBoard size={350}>
       <Slot/>
     </StyledBoard>
   )
