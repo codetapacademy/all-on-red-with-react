@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import { StyledCircle, StyledCircleWrapper } from './circle.style';
 import NumberSlot from '../number-slot';
 import Sphere from '../sphere';
+import Elected from '../elected/elected.component';
 
 const Circle = () => {
+  const [elected, setElected] = useState(null);
+  const [message, setMessage] = useState('');
   const [win, setWin] = useState({ animationPlayState: 'paused' });
   const length = 18;
   const numberSlotList = [
@@ -31,8 +34,16 @@ const Circle = () => {
 
   // console.log(numberSlotList);
 
-  const bet = () => {
-    const randomNumber = Math.round(Math.random() * 38);
+  const showMessage = (win, multiplier) => {
+    if (win) {
+      setMessage(`You won £${multiplier * 10}`);
+    } else {
+      setMessage(`You lost £${multiplier * 10}`);
+    }
+  };
+
+  const spinIt = () => {
+    const randomNumber = Math.round(Math.random() * 37);
     setWin({
       ...numberSlotList[randomNumber],
       animationPlayState: 'running',
@@ -40,6 +51,33 @@ const Circle = () => {
         numberSlotList[randomNumber].rotation +
         360 * (~~(Math.random() * 7) + 3)
     });
+
+    console.log(numberSlotList[randomNumber], elected);
+
+    const { key, multiplier } = elected;
+
+    if (['even', 'odd'].includes(key)) {
+      const obj = {
+        0: 'even',
+        1: 'odd'
+      };
+      showMessage(
+        obj[+numberSlotList[randomNumber].number % 2] === key,
+        multiplier
+      );
+    } else if (['black', 'red'].includes(key)) {
+      showMessage(numberSlotList[randomNumber].color === key, multiplier);
+    } else {
+      const keyPieces = key.split(',');
+      showMessage(
+        keyPieces.includes(numberSlotList[randomNumber].number),
+        multiplier
+      );
+    }
+  };
+
+  const handleElect = (key, multiplier) => {
+    setElected({ key, multiplier });
   };
 
   return (
@@ -50,7 +88,9 @@ const Circle = () => {
         ))}
       </StyledCircle>
       <Sphere win={win} />
-      <button onClick={bet}>BET</button>
+      <div>{message}</div>
+      {elected && <button onClick={spinIt}>Spin It</button>}
+      <Elected numberSlotList={numberSlotList} handleElect={handleElect} />
     </StyledCircleWrapper>
   );
 };
