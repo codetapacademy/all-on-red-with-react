@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyledBoard } from './board.style'
 import Slot from '../slot'
+import Ball from '../ball'
 
 const Board = () => {
   const length = 18
@@ -31,7 +32,7 @@ const Board = () => {
   return (
     <StyledBoard side={350}>
       {slotList.map(slot => <Slot {...slot} />)}
-      <Slot/>
+      <Ball/>
     </StyledBoard>
   )
 }
