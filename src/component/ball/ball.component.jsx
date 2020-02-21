@@ -2,9 +2,9 @@ import React from 'react'
 import { StyledBall} from './ball.style'
 
 
-const Ball = ({ rotation }) => {
+const Ball = ({ winner }) => {
   return (
-    <StyledBall rotation={rotation} />
+    <StyledBall winner={winner} />
   )
 }
 
