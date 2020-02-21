@@ -7,8 +7,9 @@ export const StyledBall = styled.div`
   position: absolute;
   left: 160px;
   top: 50px;
-  transform: rotate(50deg);
+  transform: rotate(0deg);
   transform-origin: 50% 100%;
+  animation: spin 5s ease-out forwards;
 
   &::after {
     content: '';
@@ -19,5 +20,10 @@ export const StyledBall = styled.div`
     position: absolute;
     top: 10px;
     left: 0;
+  }
+
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(1440deg); }
   }
 `
