@@ -1,8 +1,10 @@
 import React from 'react'
+import { StyledBall} from './ball.style'
+
 
 const Ball = () => {
   return (
-    <StyledBall>ball</StyledBall>
+    <StyledBall />
   )
 }
 

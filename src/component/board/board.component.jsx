@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyledBoard } from './board.style'
+import { StyledBoard, StyledBoardWrapper } from './board.style'
 import Slot from '../slot'
 import Ball from '../ball'
 
@@ -30,10 +30,12 @@ const Board = () => {
   ];
 
   return (
-    <StyledBoard side={350}>
-      {slotList.map(slot => <Slot {...slot} />)}
+    <StyledBoardWrapper>
+      <StyledBoard side={350}>
+        {slotList.map(slot => <Slot {...slot} />)}
+      </StyledBoard>
       <Ball/>
-    </StyledBoard>
+    </StyledBoardWrapper>
   )
 }
 
