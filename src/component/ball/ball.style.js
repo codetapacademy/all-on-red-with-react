@@ -24,6 +24,6 @@ export const StyledBall = styled.div`
 
   @keyframes spin {
     from { transform: rotate(0deg); }
-    to { transform: rotate(1440deg); }
+    to { transform: rotate(${({ rotation }) => rotation}deg); }
   }
 `
