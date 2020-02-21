@@ -30,7 +30,7 @@ const Board = () => {
 
   return (
     <StyledBoard side={350}>
-      {slotList.map(slot => <Slot key={slot.number} {...slot} />)}
+      {slotList.map(slot => <Slot {...slot} />)}
       <Slot/>
     </StyledBoard>
   )
