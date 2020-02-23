@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyledSelected } from './selected.style'
 
-const Selected = ({ slotList }) => {
+const Selected = ({ slotList, handleSelect}) => {
   const selection = {
     black: 1,
     red: 1,
@@ -21,7 +21,11 @@ const Selected = ({ slotList }) => {
 console.log(selection)
 
   return (
-    <StyledSelected>Select</StyledSelected>
+    <StyledSelected>
+      {Object.keys(selection).map(key => (
+      <button key={key} onClick={() => handleSelect(key, selection[key])}>{key}</button>
+      ))}
+    </StyledSelected>
   )
 }
 
