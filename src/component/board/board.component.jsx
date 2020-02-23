@@ -30,20 +30,40 @@ const Board = () => {
         number: n + '',
         rotation: ~~((360 / 38) * (n + 1) * 100) / 100,
         color: n % 2 ? 'red' : 'black'
-    }))
-  ];
+    })),
+  ]
 
-  const bet = () => {
-    const randomNumber = Math.round(Math.random() * 38);
+  const showMessage = (win, multiplier) => {
+    if(win){
+      console.log(`You won £${multiplier * 10}`)
+    } else {
+      console.log(`You lost £${multiplier * 10}`)
+    }
+    console.log(win, multiplier)
+  }
+
+  const spinIt = () => {
+    const randomNumber = Math.round(Math.random() * 37);
     setWinner({
       ...slotList[randomNumber],
       animationPlayState: 'running',
       rotation: slotList[randomNumber].rotation + (360 * (~~(Math.random() * 7) + 3))
     })
+
+    console.log(slotList[randomNumber],
+    selected)
+    const { key, multiplier } = selected;
+    if(['even', 'odd'].includes(key)){
+      const o = {
+        0: 'even',
+        1: 'odd'
+      }
+      showMessage(o[+slotList[randomNumber].number % 2] === key, multiplier)
+    }
   }
 
   const handleSelect = (key, multiplier) => {
-    setSelected(key, multiplier)
+    setSelected({key, multiplier})
   }
 
   return (
@@ -52,7 +72,7 @@ const Board = () => {
         {slotList.map(slot => <Slot key={slot.number} {...slot} />)}
       </StyledBoard>
       <Ball winner={winner}/>
-      {selected && <button onClick={bet}>spin it</button>}
+      {selected && <button onClick={spinIt}>spin it</button>}
       <Selected slotList={slotList} handleSelect={handleSelect} />
     </StyledBoardWrapper>
   )
