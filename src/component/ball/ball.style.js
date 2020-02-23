@@ -17,7 +17,7 @@ export const StyledBall = styled.div`
     content: '';
     width: 30px;
     height: 30px;
-    background-color: white;
+    background-color: #ffffff;
     border-radius: 50%;
     position: absolute;
     top: 10px;
