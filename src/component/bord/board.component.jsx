@@ -5,6 +5,7 @@ import Ball from "../ball";
 import Selected from "../selected/selected.component";
 
 const Board = () => {
+  const [selected, setSelected] = useState(null);
   const [winner, setWinnner] = useState({ animationPlayState: "paused" });
 
   const length = 18;
@@ -41,6 +42,10 @@ const Board = () => {
     });
   };
 
+  const handleSelect = (key, multiplier) => {
+    setSelected({ key, multiplier });
+  };
+
   return (
     <StyledBoardWrapper>
       <StyledBoard side={350}>
@@ -49,8 +54,8 @@ const Board = () => {
         ))}
       </StyledBoard>
       <Ball winner={winner} />
-      <button onClick={bet}>BET</button>
-      <Selected slotList={slotList} />
+      {selected && <button onClick={bet}>Spin it</button>}
+      <Selected slotList={slotList} handleSelect={handleSelect} />
     </StyledBoardWrapper>
   );
 };
