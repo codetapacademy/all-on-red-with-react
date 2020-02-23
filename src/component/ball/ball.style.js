@@ -10,8 +10,9 @@ export const StyleBall = styled.div`
   transform: rotate(0deg);
   transform-origin: 50% 100%;
   animation: spin 5s ease-out forwards;
+  animation-play-state: ${({ winner }) => winner.animationPlayState};
 
-  &::before {
+  &::after {
     content: "";
     position: absolute;
     top: 5px;
@@ -27,7 +28,7 @@ export const StyleBall = styled.div`
       transform: rotate(0deg);
     }
     to {
-      transform: rotate(${({ rotation }) => rotation}deg);
+      transform: rotate(${({ winner }) => winner.rotation}deg);
     }
   }
 `;

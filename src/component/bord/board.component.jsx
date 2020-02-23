@@ -4,7 +4,7 @@ import Slot from "../slot";
 import Ball from "../ball";
 
 const Board = () => {
-  const [winner, setWinnner] = useState({});
+  const [winner, setWinnner] = useState({ animationPlayState: "paused" });
 
   const length = 18;
   const slotList = [
@@ -32,7 +32,12 @@ const Board = () => {
 
   const bet = () => {
     const randomNumber = Math.round(Math.random() * 38);
-    setWinnner(slotList[randomNumber]);
+    setWinnner({
+      ...slotList[randomNumber],
+      animationPlayState: "running",
+      rotation:
+        slotList[randomNumber].rotation + 360 * (~~(Math.random() * 7) + 3)
+    });
   };
 
   return (
@@ -42,7 +47,7 @@ const Board = () => {
           <Slot key={slot.number} {...slot} />
         ))}
       </StyledBoard>
-      <Ball rotation={winner.rotation} />
+      <Ball winner={winner} />
       <button onClick={bet}>BET</button>
     </StyledBoardWrapper>
   );
