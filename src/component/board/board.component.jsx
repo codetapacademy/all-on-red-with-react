@@ -7,6 +7,7 @@ import Selected from '../selected'
 
 const Board = () => {
   const [selected, setSelected] = useState(null)
+  const [message, setMessage] = useState('')
   const [winner, setWinner] = useState({ animationPlayState: 'paused' })
   const length = 18
 
@@ -30,20 +31,44 @@ const Board = () => {
         number: n + '',
         rotation: ~~((360 / 38) * (n + 1) * 100) / 100,
         color: n % 2 ? 'red' : 'black'
-    }))
-  ];
+    })),
+  ]
 
-  const bet = () => {
-    const randomNumber = Math.round(Math.random() * 38);
+  const showMessage = (win, multiplier) => {
+    if(win){
+      setMessage(`You won £${multiplier * 10}`)
+    } else {
+      setMessage(`You lost £${multiplier * 10}`)
+    }
+  }
+
+  const spinIt = () => {
+    const randomNumber = Math.round(Math.random() * 37);
     setWinner({
       ...slotList[randomNumber],
       animationPlayState: 'running',
       rotation: slotList[randomNumber].rotation + (360 * (~~(Math.random() * 7) + 3))
     })
+
+    console.log(slotList[randomNumber],
+    selected)
+    const { key, multiplier } = selected;
+    if(['even', 'odd'].includes(key)){
+      const o = {
+        0: 'even',
+        1: 'odd'
+      }
+      showMessage(o[+slotList[randomNumber].number % 2] === key, multiplier)
+    } else if(['black', 'red'].includes(key)) {
+      showMessage(slotList[randomNumber].color === key, multiplier)
+    } else {
+      const keyPieces = key.split(',')
+      showMessage(keyPieces.includes(slotList[randomNumber].number), multiplier)
+    }
   }
 
   const handleSelect = (key, multiplier) => {
-    setSelected(key, multiplier)
+    setSelected({key, multiplier})
   }
 
   return (
@@ -52,7 +77,8 @@ const Board = () => {
         {slotList.map(slot => <Slot key={slot.number} {...slot} />)}
       </StyledBoard>
       <Ball winner={winner}/>
-      {selected && <button onClick={bet}>spin it</button>}
+      <div>{message}</div>
+      {selected && <button onClick={spinIt}>spin it</button>}
       <Selected slotList={slotList} handleSelect={handleSelect} />
     </StyledBoardWrapper>
   )

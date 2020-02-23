@@ -18,8 +18,6 @@ const Selected = ({ slotList, handleSelect}) => {
     selection[`${slot.number},${slotList[key < slotList.lenght - 1 ? key + 1 : 0].number},${slotList[key < slotList.length - 2 ? key + 2 : (key === slotList.lenght - 1 ? 1 : 0)].number}`] = 11
   })
 
-console.log(selection)
-
   return (
     <StyledSelected>
       {Object.keys(selection).map(key => (
