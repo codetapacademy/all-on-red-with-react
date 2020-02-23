@@ -32,7 +32,15 @@ const Board = () => {
     }))
   ];
 
-  const bet = () => {
+  const showMessage = (win, multiplier) => {
+    if (win) {
+      console.log(`You won ${multiplier * 10}`);
+    } else {
+      console.log(`You lost ${multiplier * 10}`);
+    }
+  };
+
+  const spinIt = () => {
     const randomNumber = Math.round(Math.random() * 38);
     setWinnner({
       ...slotList[randomNumber],
@@ -40,6 +48,16 @@ const Board = () => {
       rotation:
         slotList[randomNumber].rotation + 360 * (~~(Math.random() * 7) + 3)
     });
+
+    console.log(slotList[randomNumber], selected);
+    const { key, multiplier } = selected;
+    if (["even", "odd"].includes(key)) {
+      const o = {
+        0: "even",
+        1: "odd"
+      };
+      showMessage(o[+slotList[randomNumber].number % 2] === key, multiplier);
+    }
   };
 
   const handleSelect = (key, multiplier) => {
@@ -54,7 +72,7 @@ const Board = () => {
         ))}
       </StyledBoard>
       <Ball winner={winner} />
-      {selected && <button onClick={bet}>Spin it</button>}
+      {selected && <button onClick={spinIt}>Spin it</button>}
       <Selected slotList={slotList} handleSelect={handleSelect} />
     </StyledBoardWrapper>
   );
