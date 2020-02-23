@@ -27,7 +27,7 @@ export const StyleBall = styled.div`
       transform: rotate(0deg);
     }
     to {
-      transform: rotate(1440deg);
+      transform: rotate(${({ rotation }) => rotation}deg);
     }
   }
 `;
