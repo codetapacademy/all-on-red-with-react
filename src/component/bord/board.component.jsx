@@ -6,6 +6,7 @@ import Selected from "../selected/selected.component";
 
 const Board = () => {
   const [selected, setSelected] = useState(null);
+  const [message, setMessage] = useState("");
   const [winner, setWinnner] = useState({ animationPlayState: "paused" });
 
   const length = 18;
@@ -34,9 +35,9 @@ const Board = () => {
 
   const showMessage = (win, multiplier) => {
     if (win) {
-      console.log(`You won ${multiplier * 10}`);
+      setMessage(`You won £${multiplier * 10}`);
     } else {
-      console.log(`You lost ${multiplier * 10}`);
+      setMessage(`You lost £${multiplier * 10}`);
     }
   };
 
@@ -57,6 +58,14 @@ const Board = () => {
         1: "odd"
       };
       showMessage(o[+slotList[randomNumber].number % 2] === key, multiplier);
+    } else if (["black", "red"].includes(key)) {
+      showMessage(slotList[randomNumber].color === key, multiplier);
+    } else {
+      const keyPieces = key.split(",");
+      showMessage(
+        keyPieces.includes(slotList[randomNumber].number),
+        multiplier
+      );
     }
   };
 
@@ -72,6 +81,7 @@ const Board = () => {
         ))}
       </StyledBoard>
       <Ball winner={winner} />
+      <div>{message}</div>
       {selected && <button onClick={spinIt}>Spin it</button>}
       <Selected slotList={slotList} handleSelect={handleSelect} />
     </StyledBoardWrapper>
