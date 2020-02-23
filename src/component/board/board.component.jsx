@@ -1,8 +1,13 @@
-import React from 'react'
-import { StyledBoard } from './board.style'
+import React, { useState } from 'react'
+import { StyledBoard, StyledBoardWrapper } from './board.style'
 import Slot from '../slot'
+import Ball from '../ball'
+import Selected from '../selected'
+
 
 const Board = () => {
+  const [selected, setSelected] = useState(null)
+  const [winner, setWinner] = useState({ animationPlayState: 'paused' })
   const length = 18
 
   const slotList = [
@@ -28,11 +33,28 @@ const Board = () => {
     }))
   ];
 
+  const bet = () => {
+    const randomNumber = Math.round(Math.random() * 38);
+    setWinner({
+      ...slotList[randomNumber],
+      animationPlayState: 'running',
+      rotation: slotList[randomNumber].rotation + (360 * (~~(Math.random() * 7) + 3))
+    })
+  }
+
+  const handleSelect = (key, multiplier) => {
+    setSelected(key, multiplier)
+  }
+
   return (
-    <StyledBoard side={350}>
-      {slotList.map(slot => <Slot {...slot} />)}
-      <Slot/>
-    </StyledBoard>
+    <StyledBoardWrapper>
+      <StyledBoard side={350}>
+        {slotList.map(slot => <Slot key={slot.number} {...slot} />)}
+      </StyledBoard>
+      <Ball winner={winner}/>
+      {selected && <button onClick={bet}>spin it</button>}
+      <Selected slotList={slotList} handleSelect={handleSelect} />
+    </StyledBoardWrapper>
   )
 }
 
